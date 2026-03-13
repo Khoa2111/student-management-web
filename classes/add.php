@@ -4,6 +4,7 @@ require_once '../config/config.php';
 requireLogin();
 
 $pageTitle = 'Thêm lớp học';
+$loadValidate = true;
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

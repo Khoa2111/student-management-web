@@ -8,6 +8,7 @@ if (isLoggedIn()) {
 }
 
 $pageTitle = 'Đăng ký';
+$loadValidate = true;
 $errors = [];
 $success = '';
 
