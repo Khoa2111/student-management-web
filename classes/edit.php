@@ -23,6 +23,7 @@ if (!$class) {
 }
 
 $pageTitle = 'Sửa lớp: ' . $class['class_name'];
+$loadValidate = true;
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

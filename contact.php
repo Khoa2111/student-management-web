@@ -3,6 +3,7 @@
 require_once 'config/config.php';
 
 $pageTitle = 'Liên hệ';
+$loadValidate = true;
 $successMsg = '';
 $errors = [];
 

@@ -9,6 +9,7 @@ if (isLoggedIn()) {
 }
 
 $pageTitle = 'Đăng nhập';
+$loadValidate = true;
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

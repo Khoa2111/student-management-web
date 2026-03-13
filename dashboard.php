@@ -4,6 +4,7 @@ require_once 'config/config.php';
 requireLogin();
 
 $pageTitle = 'Dashboard';
+$loadDashboardCSS = true;
 
 // Thống kê tổng quan
 $totalStudents   = $conn->query("SELECT COUNT(*) FROM students")->fetch_row()[0];

@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="navbar-brand">
         <a href="<?php echo SITE_URL; ?>/index.php">
-            🎓 <?php echo SITE_NAME; ?>
+            <img src="<?php echo SITE_URL; ?>/assets/images/logo.svg" alt="<?php echo SITE_NAME; ?>" height="32" style="vertical-align:middle;">
         </a>
         <button class="navbar-toggle" id="navbarToggle" aria-label="Menu">
             <span></span><span></span><span></span>

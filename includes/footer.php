@@ -35,5 +35,8 @@
 <button id="scrollTopBtn" title="Lên đầu trang">&#8679;</button>
 
 <script src="<?php echo SITE_URL; ?>/js/main.js"></script>
+<?php if (!empty($loadValidate)): ?>
+<script src="<?php echo SITE_URL; ?>/js/validate.js"></script>
+<?php endif; ?>
 </body>
 </html>

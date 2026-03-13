@@ -4,6 +4,7 @@ require_once '../config/config.php';
 requireLogin();
 
 $pageTitle = 'Thêm sinh viên';
+$loadValidate = true;
 $errors = [];
 
 // Lấy danh sách lớp

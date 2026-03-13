@@ -16,6 +16,8 @@ include 'includes/navbar.php';
 
 <!-- Hero Section -->
 <section class="hero">
+    <img src="<?php echo SITE_URL; ?>/assets/images/hero-illustration.svg"
+         alt="Student Management System" class="hero-illustration">
     <h1>🎓 Student Management System</h1>
     <p>Hệ thống quản lý sinh viên toàn diện – Dễ sử dụng, hiệu quả, chính xác. Quản lý thông tin sinh viên, lớp học và môn học trên một nền tảng duy nhất.</p>
     <div class="hero-buttons">

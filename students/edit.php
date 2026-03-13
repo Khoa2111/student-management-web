@@ -24,6 +24,7 @@ if (!$student) {
 }
 
 $pageTitle = 'Sửa sinh viên: ' . $student['full_name'];
+$loadValidate = true;
 $errors = [];
 
 // Lấy danh sách lớp
