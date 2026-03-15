@@ -3,7 +3,7 @@
 require_once '../config/config.php';
 
 if (isLoggedIn()) {
-    header('Location: ' . SITE_URL . '/dashboard.php');
+    header('Location: ' . url('/dashboard.php'));
     exit();
 }
 
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($stmt->execute()) {
             $_SESSION['success'] = 'Đăng ký thành công! Vui lòng đăng nhập.';
-            header('Location: ' . SITE_URL . '/auth/login.php');
+            header('Location: ' . url('/auth/login.php'));
             exit();
         } else {
             $errors[] = 'Đã có lỗi xảy ra. Vui lòng thử lại.';
@@ -117,7 +117,7 @@ include '../includes/navbar.php';
         </form>
 
         <div class="auth-link">
-            <p>Đã có tài khoản? <a href="<?php echo SITE_URL; ?>/auth/login.php">Đăng nhập</a></p>
+            <p>Đã có tài khoản? <a href="<?php echo url('/auth/login.php'); ?>">Đăng nhập</a></p>
         </div>
     </div>
 </div>

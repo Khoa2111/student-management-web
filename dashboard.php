@@ -78,10 +78,10 @@ include 'includes/navbar.php';
     <div class="card" style="margin-bottom:24px;">
         <div class="card-header">⚡ Thao tác nhanh</div>
         <div class="card-body" style="display:flex;gap:12px;flex-wrap:wrap;">
-            <a href="<?php echo SITE_URL; ?>/students/add.php" class="btn btn-primary">➕ Thêm sinh viên</a>
-            <a href="<?php echo SITE_URL; ?>/classes/add.php"  class="btn btn-success">➕ Thêm lớp học</a>
-            <a href="<?php echo SITE_URL; ?>/students/index.php" class="btn btn-secondary">👥 Danh sách sinh viên</a>
-            <a href="<?php echo SITE_URL; ?>/classes/index.php"  class="btn btn-secondary">🏫 Danh sách lớp học</a>
+            <a href="<?php echo url('/students/add.php'); ?>" class="btn btn-primary">➕ Thêm sinh viên</a>
+            <a href="<?php echo url('/classes/add.php'); ?>"  class="btn btn-success">➕ Thêm lớp học</a>
+            <a href="<?php echo url('/students/index.php'); ?>" class="btn btn-secondary">👥 Danh sách sinh viên</a>
+            <a href="<?php echo url('/classes/index.php'); ?>"  class="btn btn-secondary">🏫 Danh sách lớp học</a>
         </div>
     </div>
 
@@ -90,7 +90,7 @@ include 'includes/navbar.php';
         <div class="card">
             <div class="card-header">
                 🆕 Sinh viên mới nhất
-                <a href="<?php echo SITE_URL; ?>/students/index.php" style="font-size:0.82rem;color:#aaa;font-weight:400;">Xem tất cả &rsaquo;</a>
+                <a href="<?php echo url('/students/index.php'); ?>" style="font-size:0.82rem;color:#aaa;font-weight:400;">Xem tất cả &rsaquo;</a>
             </div>
             <div class="card-body" style="padding:0">
                 <div class="table-responsive">
@@ -124,7 +124,7 @@ include 'includes/navbar.php';
         <div class="card">
             <div class="card-header">
                 🏫 Sinh viên theo lớp
-                <a href="<?php echo SITE_URL; ?>/classes/index.php" style="font-size:0.82rem;color:#aaa;font-weight:400;">Xem tất cả &rsaquo;</a>
+                <a href="<?php echo url('/classes/index.php'); ?>" style="font-size:0.82rem;color:#aaa;font-weight:400;">Xem tất cả &rsaquo;</a>
             </div>
             <div class="card-body" style="padding:0">
                 <div class="table-responsive">

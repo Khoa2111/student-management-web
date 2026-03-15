@@ -11,7 +11,7 @@ include 'includes/navbar.php';
     <div class="page-header">
         <div>
             <h1>📋 Giới thiệu</h1>
-            <span class="breadcrumb"><a href="<?php echo SITE_URL; ?>/index.php">Trang chủ</a> &rsaquo; Giới thiệu</span>
+            <span class="breadcrumb"><a href="<?php echo url('/index.php'); ?>">Trang chủ</a> &rsaquo; Giới thiệu</span>
         </div>
     </div>
 

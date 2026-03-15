@@ -16,17 +16,17 @@ include 'includes/navbar.php';
 
 <!-- Hero Section -->
 <section class="hero">
-    <img src="<?php echo SITE_URL; ?>/assets/images/hero-illustration.svg"
+    <img src="<?php echo url('/assets/images/hero-illustration.svg'); ?>"
          alt="Student Management System" class="hero-illustration">
     <h1>🎓 Student Management System</h1>
     <p>Hệ thống quản lý sinh viên toàn diện – Dễ sử dụng, hiệu quả, chính xác. Quản lý thông tin sinh viên, lớp học và môn học trên một nền tảng duy nhất.</p>
     <div class="hero-buttons">
         <?php if (isLoggedIn()): ?>
-            <a href="<?php echo SITE_URL; ?>/dashboard.php" class="btn-hero-primary">📊 Vào Dashboard</a>
-            <a href="<?php echo SITE_URL; ?>/students/index.php" class="btn-hero-outline">👥 Quản lý sinh viên</a>
+            <a href="<?php echo url('/dashboard.php'); ?>" class="btn-hero-primary">📊 Vào Dashboard</a>
+            <a href="<?php echo url('/students/index.php'); ?>" class="btn-hero-outline">👥 Quản lý sinh viên</a>
         <?php else: ?>
-            <a href="<?php echo SITE_URL; ?>/auth/login.php" class="btn-hero-primary">🔐 Đăng nhập</a>
-            <a href="<?php echo SITE_URL; ?>/auth/register.php" class="btn-hero-outline">📝 Đăng ký</a>
+            <a href="<?php echo url('/auth/login.php'); ?>" class="btn-hero-primary">🔐 Đăng nhập</a>
+            <a href="<?php echo url('/auth/register.php'); ?>" class="btn-hero-outline">📝 Đăng ký</a>
         <?php endif; ?>
     </div>
 </section>

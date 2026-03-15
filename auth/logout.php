@@ -3,5 +3,5 @@
 require_once '../config/config.php';
 
 session_destroy();
-header('Location: ' . SITE_URL . '/auth/login.php');
+header('Location: ' . url('/auth/login.php'));
 exit();
