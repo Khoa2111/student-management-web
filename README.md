@@ -76,8 +76,8 @@ student-management-web/
 ### Các bước cài đặt
 
 1. **Sao chép project** vào thư mục web server:
-   - XAMPP: `C:/xampp/htdocs/student-management-web/`
-   - Laragon: `C:/laragon/www/student-management-web/`
+   - XAMPP: `C:/xampp/htdocs/<tên-thư-mục>/`
+   - Laragon: `C:/laragon/www/<tên-thư-mục>/`
 
 2. **Tạo database:**
    - Mở phpMyAdmin (`http://localhost/phpmyadmin`)
@@ -89,7 +89,8 @@ student-management-web/
    - Chỉnh sửa `DB_HOST`, `DB_USER`, `DB_PASS` cho phù hợp
 
 4. **Truy cập website:**
-   - Mở trình duyệt và vào `http://localhost/student-management-web`
+   - Mở trình duyệt và vào `http://localhost/<tên-thư-mục>` (ví dụ: `http://localhost/student-management-web`)
+   - URL được tạo tự động theo tên thư mục bạn đặt, không cần cấu hình thêm
 
 ### Tài khoản demo
 - **Tên đăng nhập:** `admin`

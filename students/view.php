@@ -5,7 +5,7 @@ requireLogin();
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {
-    header('Location: ' . SITE_URL . '/students/index.php');
+    header('Location: ' . url('/students/index.php'));
     exit();
 }
 
@@ -24,7 +24,7 @@ $stmt->close();
 if (!$student) {
     $_SESSION['flash_msg']  = 'Không tìm thấy sinh viên.';
     $_SESSION['flash_type'] = 'error';
-    header('Location: ' . SITE_URL . '/students/index.php');
+    header('Location: ' . url('/students/index.php'));
     exit();
 }
 
@@ -52,8 +52,8 @@ include '../includes/navbar.php';
         <div>
             <h1>👤 <?php echo htmlspecialchars($student['full_name'], ENT_QUOTES, 'UTF-8'); ?></h1>
             <span class="breadcrumb">
-                <a href="<?php echo SITE_URL; ?>/dashboard.php">Dashboard</a> &rsaquo;
-                <a href="<?php echo SITE_URL; ?>/students/index.php">Sinh viên</a> &rsaquo;
+                <a href="<?php echo url('/dashboard.php'); ?>">Dashboard</a> &rsaquo;
+                <a href="<?php echo url('/students/index.php'); ?>">Sinh viên</a> &rsaquo;
                 Chi tiết
             </span>
         </div>

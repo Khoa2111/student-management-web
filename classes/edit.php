@@ -5,7 +5,7 @@ requireLogin();
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {
-    header('Location: ' . SITE_URL . '/classes/index.php');
+    header('Location: ' . url('/classes/index.php'));
     exit();
 }
 
@@ -18,7 +18,7 @@ $stmt->close();
 if (!$class) {
     $_SESSION['flash_msg']  = 'Không tìm thấy lớp học.';
     $_SESSION['flash_type'] = 'error';
-    header('Location: ' . SITE_URL . '/classes/index.php');
+    header('Location: ' . url('/classes/index.php'));
     exit();
 }
 
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             $_SESSION['flash_msg']  = 'Cập nhật lớp học thành công!';
             $_SESSION['flash_type'] = 'success';
-            header('Location: ' . SITE_URL . '/classes/index.php');
+            header('Location: ' . url('/classes/index.php'));
             exit();
         } else {
             $errors[] = 'Đã có lỗi xảy ra. Vui lòng thử lại.';
@@ -71,8 +71,8 @@ include '../includes/navbar.php';
         <div>
             <h1>✏️ Sửa lớp học</h1>
             <span class="breadcrumb">
-                <a href="<?php echo SITE_URL; ?>/dashboard.php">Dashboard</a> &rsaquo;
-                <a href="<?php echo SITE_URL; ?>/classes/index.php">Lớp học</a> &rsaquo;
+                <a href="<?php echo url('/dashboard.php'); ?>">Dashboard</a> &rsaquo;
+                <a href="<?php echo url('/classes/index.php'); ?>">Lớp học</a> &rsaquo;
                 Chỉnh sửa
             </span>
         </div>
