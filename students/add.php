@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             $_SESSION['flash_msg']  = 'Thêm sinh viên thành công!';
             $_SESSION['flash_type'] = 'success';
-            header('Location: ' . url('/students/index.php'));
+            header('Location: ' . SITE_URL . '/students/index.php');
             exit();
         } else {
             $errors[] = 'Đã có lỗi xảy ra. Vui lòng thử lại.';
@@ -78,8 +78,8 @@ include '../includes/navbar.php';
         <div>
             <h1>➕ Thêm sinh viên</h1>
             <span class="breadcrumb">
-                <a href="<?php echo url('/dashboard.php'); ?>">Dashboard</a> &rsaquo;
-                <a href="<?php echo url('/students/index.php'); ?>">Sinh viên</a> &rsaquo;
+                <a href="<?php echo SITE_URL; ?>/dashboard.php">Dashboard</a> &rsaquo;
+                <a href="<?php echo SITE_URL; ?>/students/index.php">Sinh viên</a> &rsaquo;
                 Thêm mới
             </span>
         </div>

@@ -7,7 +7,7 @@ requireLogin();
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {
-    header('Location: ' . url('/students/index.php'));
+    header('Location: ' . SITE_URL . '/students/index.php');
     exit();
 }
 
@@ -23,5 +23,5 @@ if ($stmt->execute() && $stmt->affected_rows > 0) {
 }
 $stmt->close();
 
-header('Location: ' . url('/students/index.php'));
+header('Location: ' . SITE_URL . '/students/index.php');
 exit();

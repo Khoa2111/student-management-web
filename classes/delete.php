@@ -5,7 +5,7 @@ requireLogin();
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {
-    header('Location: ' . url('/classes/index.php'));
+    header('Location: ' . SITE_URL . '/classes/index.php');
     exit();
 }
 
@@ -19,7 +19,7 @@ $stmt->close();
 if ($count > 0) {
     $_SESSION['flash_msg']  = "Không thể xoá lớp này vì vẫn còn $count sinh viên trong lớp. Hãy chuyển sinh viên sang lớp khác trước.";
     $_SESSION['flash_type'] = 'error';
-    header('Location: ' . url('/classes/index.php'));
+    header('Location: ' . SITE_URL . '/classes/index.php');
     exit();
 }
 
@@ -35,5 +35,5 @@ if ($stmt->execute() && $stmt->affected_rows > 0) {
 }
 $stmt->close();
 
-header('Location: ' . url('/classes/index.php'));
+header('Location: ' . SITE_URL . '/classes/index.php');
 exit();
