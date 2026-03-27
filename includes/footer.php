@@ -7,13 +7,13 @@
         <div class="footer-section">
             <h4>Liên kết nhanh</h4>
             <ul>
-                <li><a href="<?php echo url('/index.php'); ?>">Trang chủ</a></li>
-                <li><a href="<?php echo url('/about.php'); ?>">Giới thiệu</a></li>
-                <li><a href="<?php echo url('/contact.php'); ?>">Liên hệ</a></li>
+                <li><a href="<?php echo SITE_URL; ?>/index.php">Trang chủ</a></li>
+                <li><a href="<?php echo SITE_URL; ?>/about.php">Giới thiệu</a></li>
+                <li><a href="<?php echo SITE_URL; ?>/contact.php">Liên hệ</a></li>
                 <?php if (isLoggedIn()): ?>
-                <li><a href="<?php echo url('/dashboard.php'); ?>">Dashboard</a></li>
+                <li><a href="<?php echo SITE_URL; ?>/dashboard.php">Dashboard</a></li>
                 <?php else: ?>
-                <li><a href="<?php echo url('/auth/login.php'); ?>">Đăng nhập</a></li>
+                <li><a href="<?php echo SITE_URL; ?>/auth/login.php">Đăng nhập</a></li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -34,9 +34,9 @@
 <!-- Nút scroll to top -->
 <button id="scrollTopBtn" title="Lên đầu trang">&#8679;</button>
 
-<script src="<?php echo url('/js/main.js'); ?>"></script>
+<script src="<?php echo SITE_URL; ?>/js/main.js"></script>
 <?php if (!empty($loadValidate)): ?>
-<script src="<?php echo url('/js/validate.js'); ?>"></script>
+<script src="<?php echo SITE_URL; ?>/js/validate.js"></script>
 <?php endif; ?>
 </body>
 </html>

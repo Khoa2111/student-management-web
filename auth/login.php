@@ -4,7 +4,7 @@ require_once '../config/config.php';
 
 // Nếu đã đăng nhập thì chuyển về dashboard
 if (isLoggedIn()) {
-    header('Location: ' . url('/dashboard.php'));
+    header('Location: ' . SITE_URL . '/dashboard.php');
     exit();
 }
 
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['full_name'] = $user['full_name'];
             $_SESSION['role']      = $user['role'];
 
-            header('Location: ' . url('/dashboard.php'));
+            header('Location: ' . SITE_URL . '/dashboard.php');
             exit();
         } else {
             $error = 'Tên đăng nhập hoặc mật khẩu không đúng.';
@@ -75,7 +75,7 @@ include '../includes/navbar.php';
         </form>
 
         <div class="auth-link">
-            <p>Chưa có tài khoản? <a href="<?php echo url('/auth/register.php'); ?>">Đăng ký ngay</a></p>
+            <p>Chưa có tài khoản? <a href="<?php echo SITE_URL; ?>/auth/register.php">Đăng ký ngay</a></p>
             <p style="margin-top:8px;font-size:0.82rem;color:#aaa;">
                 Tài khoản demo: <strong>admin</strong> / <strong>admin123</strong>
             </p>

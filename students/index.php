@@ -60,9 +60,9 @@ include '../includes/navbar.php';
     <div class="page-header">
         <div>
             <h1>👥 Danh sách sinh viên</h1>
-            <span class="breadcrumb"><a href="<?php echo url('/dashboard.php'); ?>">Dashboard</a> &rsaquo; Sinh viên</span>
+            <span class="breadcrumb"><a href="<?php echo SITE_URL; ?>/dashboard.php">Dashboard</a> &rsaquo; Sinh viên</span>
         </div>
-        <a href="<?php echo url('/students/add.php'); ?>" class="btn btn-primary">➕ Thêm sinh viên</a>
+        <a href="<?php echo SITE_URL; ?>/students/add.php" class="btn btn-primary">➕ Thêm sinh viên</a>
     </div>
 
     <?php if ($flashMsg): ?>

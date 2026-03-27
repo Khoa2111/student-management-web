@@ -41,9 +41,9 @@ include '../includes/navbar.php';
     <div class="page-header">
         <div>
             <h1>🏫 Danh sách lớp học</h1>
-            <span class="breadcrumb"><a href="<?php echo url('/dashboard.php'); ?>">Dashboard</a> &rsaquo; Lớp học</span>
+            <span class="breadcrumb"><a href="<?php echo SITE_URL; ?>/dashboard.php">Dashboard</a> &rsaquo; Lớp học</span>
         </div>
-        <a href="<?php echo url('/classes/add.php'); ?>" class="btn btn-primary">➕ Thêm lớp học</a>
+        <a href="<?php echo SITE_URL; ?>/classes/add.php" class="btn btn-primary">➕ Thêm lớp học</a>
     </div>
 
     <?php if ($flashMsg): ?>
@@ -97,7 +97,7 @@ include '../includes/navbar.php';
                                 </td>
                                 <td>
                                     <div class="table-actions">
-                                        <a href="<?php echo url('/students/index.php'); ?>?class_id=<?php echo $row['id']; ?>"
+                                        <a href="<?php echo SITE_URL; ?>/students/index.php?class_id=<?php echo $row['id']; ?>"
                                            class="btn btn-sm btn-primary" title="Xem sinh viên">👥</a>
                                         <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-warning" title="Sửa">✏️</a>
                                         <a href="delete.php?id=<?php echo $row['id']; ?>"
