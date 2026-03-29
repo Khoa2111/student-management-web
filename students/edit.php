@@ -11,6 +11,7 @@ if ($id <= 0) {
 }
 
 // Lấy thông tin sinh viên
+$stmt = $conn->prepare("SELECT * FROM students WHERE id = ?");
 $stmt->bind_param('i', $id);
 $stmt->execute();
 $student = $stmt->get_result()->fetch_assoc();
