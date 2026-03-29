@@ -1,7 +1,8 @@
 <?php
 // students/edit.php - Sửa thông tin sinh viên
 require_once '../config/config.php';
-requireLogin();
+require_once '../auth/check_role.php';
+requireRole('admin');
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {
@@ -10,7 +11,6 @@ if ($id <= 0) {
 }
 
 // Lấy thông tin sinh viên
-$stmt = $conn->prepare("SELECT * FROM students WHERE id = ?");
 $stmt->bind_param('i', $id);
 $stmt->execute();
 $student = $stmt->get_result()->fetch_assoc();

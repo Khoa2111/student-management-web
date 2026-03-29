@@ -1,7 +1,8 @@
 <?php
 // students/index.php - Danh sách sinh viên
 require_once '../config/config.php';
-requireLogin();
+require_once '../auth/check_role.php';
+requireRole('admin');
 
 $pageTitle = 'Danh sách sinh viên';
 

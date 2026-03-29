@@ -3,7 +3,8 @@
 // Lưu ý: Bảng enrollments có ON DELETE CASCADE nên sẽ tự động xoá
 // các bản ghi liên quan khi xoá sinh viên.
 require_once '../config/config.php';
-requireLogin();
+require_once '../auth/check_role.php';
+requireRole('admin');
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {

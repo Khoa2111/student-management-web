@@ -1,7 +1,8 @@
 <?php
 // students/view.php - Xem chi tiết sinh viên
 require_once '../config/config.php';
-requireLogin();
+require_once '../auth/check_role.php';
+requireRole('admin');
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {
@@ -9,11 +10,13 @@ if ($id <= 0) {
     exit();
 }
 
-// Lấy thông tin sinh viên + lớp học
+// Lấy thông tin sinh viên + lớp học + tài khoản liên kết
 $stmt = $conn->prepare(
-    "SELECT s.*, c.class_name, c.class_code
+    "SELECT s.*, c.class_name, c.class_code,
+            u.email AS account_email, u.username AS account_username, u.status AS account_status
      FROM students s
      LEFT JOIN classes c ON s.class_id = c.id
+     LEFT JOIN users u ON s.user_id = u.id
      WHERE s.id = ?"
 );
 $stmt->bind_param('i', $id);
@@ -125,6 +128,41 @@ include '../includes/navbar.php';
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Tài khoản liên kết -->
+    <div class="card">
+        <div class="card-header">🔐 Tài khoản hệ thống</div>
+        <div class="card-body">
+            <?php if ($student['user_id']): ?>
+            <div class="student-detail-grid">
+                <div>
+                    <div class="detail-row">
+                        <span class="detail-label">Tên đăng nhập:</span>
+                        <span class="detail-value"><code><?php echo htmlspecialchars($student['account_username'], ENT_QUOTES, 'UTF-8'); ?></code></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Email tài khoản:</span>
+                        <span class="detail-value"><?php echo htmlspecialchars($student['account_email'], ENT_QUOTES, 'UTF-8'); ?></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="detail-row">
+                        <span class="detail-label">Trạng thái:</span>
+                        <span class="detail-value">
+                            <?php if (($student['account_status'] ?? 'active') === 'active'): ?>
+                                <span class="badge badge-success">Hoạt động</span>
+                            <?php else: ?>
+                                <span class="badge badge-danger">Vô hiệu hoá</span>
+                            <?php endif; ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <?php else: ?>
+            <p style="color:#999;">Sinh viên chưa được liên kết với tài khoản hệ thống.</p>
+            <?php endif; ?>
         </div>
     </div>
 
