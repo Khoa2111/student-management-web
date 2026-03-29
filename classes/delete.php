@@ -1,7 +1,7 @@
 <?php
-// classes/delete.php - Xoá lớp học
+// classes/delete.php - Xoá lớp học (chỉ Admin)
 require_once '../config/config.php';
-requireLogin();
+requireRole('admin');
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {

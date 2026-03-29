@@ -3,6 +3,9 @@
 require_once '../config/config.php';
 requireLogin();
 
+$isAdmin = hasRole('admin');
+$userId  = $_SESSION['user_id'];
+
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {
     header('Location: ' . SITE_URL . '/students/index.php');
@@ -11,7 +14,7 @@ if ($id <= 0) {
 
 // Lấy thông tin sinh viên + lớp học
 $stmt = $conn->prepare(
-    "SELECT s.*, c.class_name, c.class_code
+    "SELECT s.*, c.class_name, c.class_code, c.teacher_id
      FROM students s
      LEFT JOIN classes c ON s.class_id = c.id
      WHERE s.id = ?"
@@ -23,6 +26,14 @@ $stmt->close();
 
 if (!$student) {
     $_SESSION['flash_msg']  = 'Không tìm thấy sinh viên.';
+    $_SESSION['flash_type'] = 'error';
+    header('Location: ' . SITE_URL . '/students/index.php');
+    exit();
+}
+
+// Teacher chỉ được xem sinh viên trong lớp của mình
+if (!$isAdmin && $student['teacher_id'] != $userId) {
+    $_SESSION['flash_msg']  = 'Bạn không có quyền xem sinh viên này.';
     $_SESSION['flash_type'] = 'error';
     header('Location: ' . SITE_URL . '/students/index.php');
     exit();
@@ -58,10 +69,12 @@ include '../includes/navbar.php';
             </span>
         </div>
         <div style="display:flex;gap:10px;">
+            <?php if ($isAdmin): ?>
             <a href="edit.php?id=<?php echo $id; ?>" class="btn btn-warning">✏️ Sửa</a>
             <a href="delete.php?id=<?php echo $id; ?>"
                class="btn btn-danger confirm-delete"
                data-name="<?php echo htmlspecialchars($student['full_name'], ENT_QUOTES, 'UTF-8'); ?>">🗑 Xoá</a>
+            <?php endif; ?>
             <a href="index.php" class="btn btn-secondary">← Quay lại</a>
         </div>
     </div>

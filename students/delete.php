@@ -1,9 +1,9 @@
 <?php
-// students/delete.php - Xoá sinh viên
+// students/delete.php - Xoá sinh viên (chỉ Admin)
 // Lưu ý: Bảng enrollments có ON DELETE CASCADE nên sẽ tự động xoá
 // các bản ghi liên quan khi xoá sinh viên.
 require_once '../config/config.php';
-requireLogin();
+requireRole('admin');
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {

@@ -1,26 +1,28 @@
 <?php
-// classes/index.php - Danh sách lớp học
+// classes/index.php - Danh sách lớp học (chỉ Admin)
 require_once '../config/config.php';
-requireLogin();
+requireRole('admin');
 
 $pageTitle = 'Danh sách lớp học';
 
 $search = trim($_GET['search'] ?? '');
 
-$sql = "SELECT c.id, c.class_code, c.class_name, c.teacher, c.description,
-               COUNT(s.id) AS total_students
+$sql = "SELECT c.id, c.class_code, c.class_name, c.teacher_id,
+               COALESCE(u.full_name, c.teacher) AS teacher_name,
+               c.description, COUNT(s.id) AS total_students
         FROM classes c
+        LEFT JOIN users u ON c.teacher_id = u.id
         LEFT JOIN students s ON s.class_id = c.id";
 
 if ($search !== '') {
-    $sql .= " WHERE c.class_code LIKE ? OR c.class_name LIKE ? OR c.teacher LIKE ?";
+    $sql .= " WHERE c.class_code LIKE ? OR c.class_name LIKE ? OR u.full_name LIKE ? OR c.teacher LIKE ?";
 }
 $sql .= " GROUP BY c.id ORDER BY c.class_name";
 
 if ($search !== '') {
     $like = '%' . $search . '%';
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('sss', $like, $like, $like);
+    $stmt->bind_param('ssss', $like, $like, $like, $like);
     $stmt->execute();
     $classes = $stmt->get_result();
     $stmt->close();
@@ -90,7 +92,7 @@ include '../includes/navbar.php';
                                 <td><?php echo $i++; ?></td>
                                 <td><code><?php echo htmlspecialchars($row['class_code'], ENT_QUOTES, 'UTF-8'); ?></code></td>
                                 <td><strong><?php echo htmlspecialchars($row['class_name'], ENT_QUOTES, 'UTF-8'); ?></strong></td>
-                                <td><?php echo htmlspecialchars($row['teacher'] ?? '—', ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td><?php echo htmlspecialchars($row['teacher_name'] ?? '—', ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td><span class="badge badge-primary"><?php echo $row['total_students']; ?> SV</span></td>
                                 <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
                                     <?php echo htmlspecialchars($row['description'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
