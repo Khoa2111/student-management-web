@@ -57,15 +57,20 @@ if ($isAdmin) {
     // Sinh viên mới nhất trong lớp của mình
     $recentStudents = null;
     if (!empty($myClassIds)) {
-        $ids = implode(',', array_map('intval', $myClassIds));
-        $recentStudents = $conn->query(
+        $placeholders = implode(',', array_fill(0, count($myClassIds), '?'));
+        $types        = str_repeat('i', count($myClassIds));
+        $stmt = $conn->prepare(
             "SELECT s.student_code, s.full_name, s.email, s.gender, c.class_name, s.created_at
              FROM students s
              LEFT JOIN classes c ON s.class_id = c.id
-             WHERE s.class_id IN ($ids)
+             WHERE s.class_id IN ($placeholders)
              ORDER BY s.created_at DESC
              LIMIT 5"
         );
+        $stmt->bind_param($types, ...$myClassIds);
+        $stmt->execute();
+        $recentStudents = $stmt->get_result();
+        $stmt->close();
     }
 }
 

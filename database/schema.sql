@@ -99,7 +99,7 @@ INSERT INTO classes (class_code, class_name, teacher_id, teacher, description) V
 ('CNTT01', 'Công nghệ thông tin K1', 2, 'Nguyễn Văn A', 'Lớp CNTT khoá 1'),
 ('CNTT02', 'Công nghệ thông tin K2', 3, 'Trần Thị B',   'Lớp CNTT khoá 2'),
 ('KT01',   'Kế toán K1',            4, 'Lê Văn C',     'Lớp Kế toán khoá 1'),
-('QT01',   'Quản trị kinh doanh K1',NULL, 'Phạm Thị D', 'Lớp QTKD khoá 1');
+('QT01',   'Quản trị kinh doanh K1',NULL, NULL, 'Lớp QTKD khoá 1');
 
 -- Students
 INSERT INTO students (student_code, full_name, email, phone, gender, birthday, address, class_id) VALUES

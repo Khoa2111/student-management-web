@@ -24,7 +24,7 @@ if (!$isAdmin) {
 }
 
 if ($search !== '') {
-    $like = '%' . $conn->real_escape_string($search) . '%';
+    $like = '%' . $search . '%';
     $where[] = "(s.student_code LIKE ? OR s.full_name LIKE ? OR s.email LIKE ?)";
     $params = array_merge($params, [$like, $like, $like]);
     $types .= 'sss';

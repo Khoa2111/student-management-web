@@ -15,14 +15,14 @@ $sql = "SELECT c.id, c.class_code, c.class_name, c.teacher_id,
         LEFT JOIN students s ON s.class_id = c.id";
 
 if ($search !== '') {
-    $sql .= " WHERE c.class_code LIKE ? OR c.class_name LIKE ? OR u.full_name LIKE ? OR c.teacher LIKE ?";
+    $sql .= " WHERE c.class_code LIKE ? OR c.class_name LIKE ? OR COALESCE(u.full_name, c.teacher) LIKE ?";
 }
 $sql .= " GROUP BY c.id ORDER BY c.class_name";
 
 if ($search !== '') {
     $like = '%' . $search . '%';
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssss', $like, $like, $like, $like);
+    $stmt->bind_param('sss', $like, $like, $like);
     $stmt->execute();
     $classes = $stmt->get_result();
     $stmt->close();
