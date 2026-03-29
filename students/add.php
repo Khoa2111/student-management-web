@@ -1,8 +1,7 @@
 <?php
 // students/add.php - Thêm sinh viên mới
 require_once '../config/config.php';
-require_once '../auth/check_role.php';
-requireRole('admin');
+requireLogin();
 
 $pageTitle = 'Thêm sinh viên';
 $loadValidate = true;

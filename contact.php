@@ -53,14 +53,14 @@ include 'includes/navbar.php';
                 <span class="icon">📍</span>
                 <div>
                     <strong>Địa chỉ</strong>
-                    <p>123 Đường Nguyễn Văn Linh, Quận Ninh Kiều, TP. Cần Thơ</p>
+                    <p>123 Đường Lê Lợi, Quận 1, TP. Hồ Chí Minh</p>
                 </div>
             </div>
             <div class="contact-info-item">
                 <span class="icon">📞</span>
                 <div>
                     <strong>Điện thoại</strong>
-                    <p>(0292) 1234 5678</p>
+                    <p>(028) 1234 5678</p>
                 </div>
             </div>
             <div class="contact-info-item">
