@@ -1,7 +1,7 @@
 <?php
-// students/edit.php - Sửa thông tin sinh viên
+// students/edit.php - Sửa thông tin sinh viên (chỉ Admin)
 require_once '../config/config.php';
-requireLogin();
+requireRole('admin');
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {

@@ -47,3 +47,6 @@ function requireLogin() {
         exit();
     }
 }
+
+// Autoload role helpers (phụ thuộc vào isLoggedIn)
+require_once __DIR__ . '/../auth/check_role.php';

@@ -4,18 +4,27 @@ require_once '../config/config.php';
 requireLogin();
 
 $pageTitle = 'Danh sách sinh viên';
+$isAdmin   = hasRole('admin');
+$userId    = $_SESSION['user_id'];
 
 // Tìm kiếm và lọc
-$search   = trim($_GET['search']   ?? '');
+$search      = trim($_GET['search']   ?? '');
 $classFilter = intval($_GET['class_id'] ?? 0);
 
 // Xây dựng câu truy vấn
-$where = [];
+$where  = [];
 $params = [];
 $types  = '';
 
+// Teacher: chỉ xem sinh viên trong lớp của mình
+if (!$isAdmin) {
+    $where[] = "s.class_id IN (SELECT id FROM classes WHERE teacher_id = ?)";
+    $params[] = $userId;
+    $types   .= 'i';
+}
+
 if ($search !== '') {
-    $like = '%' . $conn->real_escape_string($search) . '%';
+    $like = '%' . $search . '%';
     $where[] = "(s.student_code LIKE ? OR s.full_name LIKE ? OR s.email LIKE ?)";
     $params = array_merge($params, [$like, $like, $like]);
     $types .= 'sss';
@@ -45,7 +54,15 @@ if ($params) {
 }
 
 // Lấy danh sách lớp để filter
-$classList = $conn->query("SELECT id, class_name FROM classes ORDER BY class_name");
+if ($isAdmin) {
+    $classList = $conn->query("SELECT id, class_name FROM classes ORDER BY class_name");
+} else {
+    $stmt = $conn->prepare("SELECT id, class_name FROM classes WHERE teacher_id = ? ORDER BY class_name");
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $classList = $stmt->get_result();
+    $stmt->close();
+}
 
 // Flash message
 $flashMsg  = $_SESSION['flash_msg']  ?? '';
@@ -62,7 +79,9 @@ include '../includes/navbar.php';
             <h1>👥 Danh sách sinh viên</h1>
             <span class="breadcrumb"><a href="<?php echo SITE_URL; ?>/dashboard.php">Dashboard</a> &rsaquo; Sinh viên</span>
         </div>
+        <?php if ($isAdmin): ?>
         <a href="<?php echo SITE_URL; ?>/students/add.php" class="btn btn-primary">➕ Thêm sinh viên</a>
+        <?php endif; ?>
     </div>
 
     <?php if ($flashMsg): ?>
@@ -138,11 +157,13 @@ include '../includes/navbar.php';
                                 <td>
                                     <div class="table-actions">
                                         <a href="view.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-primary" title="Xem">👁</a>
+                                        <?php if ($isAdmin): ?>
                                         <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-warning" title="Sửa">✏️</a>
                                         <a href="delete.php?id=<?php echo $row['id']; ?>"
                                            class="btn btn-sm btn-danger confirm-delete"
                                            data-name="<?php echo htmlspecialchars($row['full_name'], ENT_QUOTES, 'UTF-8'); ?>"
                                            title="Xoá">🗑</a>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>
