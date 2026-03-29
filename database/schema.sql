@@ -101,7 +101,7 @@ INSERT INTO classes (class_code, class_name, teacher, description) VALUES
 -- Students
 INSERT INTO students (student_code, full_name, email, phone, gender, birthday, address, class_id) VALUES
 ('SV001', 'Nguyễn Minh Tuấn', 'tuan.nm@example.com', '0901234567', 'Nam', '2003-05-10', 'Hà Nội', 1),
-('SV002', 'Trần Thị Lan',     'lan.tt@example.com',  '0912345678', 'Nữ', '2003-08-22', 'Hồ Chí Minh', 1),
+('SV002', 'Trần Thị Lan',     'lan.tt@example.com',  '0912345678', 'Nữ', '2003-08-22', 'Cần Thơ', 1),
 ('SV003', 'Lê Văn Hùng',      'hung.lv@example.com', '0923456789', 'Nam', '2002-11-15', 'Đà Nẵng', 2),
 ('SV004', 'Phạm Thị Mai',     'mai.pt@example.com',  '0934567890', 'Nữ', '2003-03-18', 'Hải Phòng', 2),
 ('SV005', 'Hoàng Văn Nam',    'nam.hv@example.com',  '0945678901', 'Nam', '2002-07-25', 'Cần Thơ', 3),
