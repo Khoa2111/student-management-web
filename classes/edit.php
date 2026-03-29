@@ -1,8 +1,7 @@
 <?php
 // classes/edit.php - Sửa lớp học
 require_once '../config/config.php';
-require_once '../auth/check_role.php';
-requireRole('admin');
+requireLogin();
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {
@@ -27,13 +26,10 @@ $pageTitle = 'Sửa lớp: ' . $class['class_name'];
 $loadValidate = true;
 $errors = [];
 
-// Lấy danh sách giáo viên
-$teacherList = $conn->query("SELECT id, full_name, username FROM users WHERE role = 'teacher' AND status = 'active' ORDER BY full_name");
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $class_code  = trim($_POST['class_code']  ?? '');
     $class_name  = trim($_POST['class_name']  ?? '');
-    $teacher_id  = intval($_POST['teacher_id'] ?? 0);
+    $teacher     = trim($_POST['teacher']     ?? '');
     $description = trim($_POST['description'] ?? '');
 
     if (empty($class_code)) $errors[] = 'Mã lớp không được để trống.';
@@ -49,19 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $teacherIdVal = $teacher_id > 0 ? $teacher_id : null;
-        // Resolve teacher name from selected teacher account
-        $teacherName = '';
-        if ($teacherIdVal) {
-            $stmtT = $conn->prepare("SELECT full_name, username FROM users WHERE id = ? AND role = 'teacher'");
-            $stmtT->bind_param('i', $teacherIdVal);
-            $stmtT->execute();
-            $tRow = $stmtT->get_result()->fetch_assoc();
-            $stmtT->close();
-            $teacherName = $tRow ? ($tRow['full_name'] ?: $tRow['username']) : '';
-        }
-        $stmt = $conn->prepare("UPDATE classes SET class_code=?, class_name=?, teacher=?, teacher_id=?, description=? WHERE id=?");
-        $stmt->bind_param('sssisi', $class_code, $class_name, $teacherName, $teacherIdVal, $description, $id);
+        $stmt = $conn->prepare("UPDATE classes SET class_code=?, class_name=?, teacher=?, description=? WHERE id=?");
+        $stmt->bind_param('ssssi', $class_code, $class_name, $teacher, $description, $id);
 
         if ($stmt->execute()) {
             $_SESSION['flash_msg']  = 'Cập nhật lớp học thành công!';
@@ -108,19 +93,9 @@ include '../includes/navbar.php';
                         value="<?php echo htmlspecialchars($class['class_code'], ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
                 <div class="form-group">
-                    <label for="teacher_id">Giáo viên phụ trách</label>
-                    <select id="teacher_id" name="teacher_id" class="form-control">
-                        <option value="0">-- Chọn giáo viên --</option>
-                        <?php
-                        $selectedTeacherId = intval($class['teacher_id'] ?? 0);
-                        while ($t = $teacherList->fetch_assoc()):
-                        ?>
-                            <option value="<?php echo $t['id']; ?>"
-                                <?php echo ($selectedTeacherId === $t['id']) ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($t['full_name'] ?: $t['username'], ENT_QUOTES, 'UTF-8'); ?>
-                            </option>
-                        <?php endwhile; ?>
-                    </select>
+                    <label for="teacher">Giáo viên phụ trách</label>
+                    <input type="text" id="teacher" name="teacher" class="form-control"
+                        value="<?php echo htmlspecialchars($class['teacher'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
             </div>
 

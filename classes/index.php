@@ -1,8 +1,7 @@
 <?php
 // classes/index.php - Danh sách lớp học
 require_once '../config/config.php';
-require_once '../auth/check_role.php';
-requireRole('admin');
+requireLogin();
 
 $pageTitle = 'Danh sách lớp học';
 

@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(255) NOT NULL,
     full_name VARCHAR(100),
     role ENUM('admin', 'teacher', 'student') NOT NULL DEFAULT 'teacher',
-    status ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -26,10 +25,8 @@ CREATE TABLE IF NOT EXISTS classes (
     class_code VARCHAR(20) NOT NULL UNIQUE,
     class_name VARCHAR(100) NOT NULL,
     teacher VARCHAR(100),
-    teacher_id INT DEFAULT NULL,
     description TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_classes_teacher FOREIGN KEY (teacher_id) REFERENCES users(id) ON DELETE SET NULL ON UPDATE CASCADE
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- -----------------------------------------------------
@@ -45,10 +42,8 @@ CREATE TABLE IF NOT EXISTS students (
     birthday DATE,
     address TEXT,
     class_id INT,
-    user_id INT DEFAULT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_students_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE SET NULL ON UPDATE CASCADE,
-    CONSTRAINT fk_students_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL ON UPDATE CASCADE
+    CONSTRAINT fk_students_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- -----------------------------------------------------
@@ -83,13 +78,8 @@ CREATE TABLE IF NOT EXISTS enrollments (
 -- -----------------------------------------------------
 
 -- Default admin account (password: admin123)
-INSERT INTO users (username, email, password, full_name, role, status) VALUES
-('admin', 'admin@example.com', '$2y$10$r5YyvYgsFnFVHi32XWGsdelMNGEvpDhgG4hcpYM6NFEpbPA2AGl0y', 'Administrator', 'admin', 'active');
-
--- Sample teacher accounts (password: teacher123)
-INSERT INTO users (username, email, password, full_name, role, status) VALUES
-('teacher1', 'teacher1@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Nguyễn Văn A', 'teacher', 'active'),
-('teacher2', 'teacher2@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Trần Thị B', 'teacher', 'active');
+INSERT INTO users (username, email, password, full_name, role) VALUES
+('admin', 'admin@example.com', '$2y$10$r5YyvYgsFnFVHi32XWGsdelMNGEvpDhgG4hcpYM6NFEpbPA2AGl0y', 'Administrator', 'admin');
 
 -- Classes
 INSERT INTO classes (class_code, class_name, teacher, description) VALUES
