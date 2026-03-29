@@ -1,7 +1,8 @@
 <?php
 // students/edit.php - Sửa thông tin sinh viên
 require_once '../config/config.php';
-requireLogin();
+require_once '../auth/check_role.php';
+requireRole('admin');
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {

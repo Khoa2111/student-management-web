@@ -20,8 +20,8 @@
         <div class="footer-section">
             <h4>Thông tin liên hệ</h4>
             <ul>
-                <li>📍 123 Đường ABC, TP.HCM</li>
-                <li>📞 (028) 1234 5678</li>
+                <li>📍 123 Đường Nguyễn Văn Linh, Quận Ninh Kiều, TP. Cần Thơ</li>
+                <li>📞 (0292) 1234 5678</li>
                 <li>✉️ info@school.edu.vn</li>
             </ul>
         </div>
